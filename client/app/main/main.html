@@ -1,0 +1,67 @@
+<navbar></navbar>
+
+<livechatbar ng-if="main.$state.includes('main.chat')"></livechatbar>
+
+<div class="container details-panel-container no-events" ng-show="main.selectedPost !== undefined">
+  <div class="col-sm-4 col-sm-offset-8 details-panel has-events">
+    <h2><span class="{{main.selectedPost.symbolClass}}"></span> {{main.selectedPost.subject}}<br><small>Posted by {{main.selectedPost.author.name}}</small></h2>
+    <article ng-repeat="comment in main.selectedPost.comments" class="flex-container">
+      <div class="profile-pic flex-grow-0"></div>
+      <div class="comment-text flex-grow-1">
+        <p>{{comment.content}} <br>
+          <small class="text-muted">By {{comment.author.name}} on {{comment.postDate | date : 'short'}}</small>
+        </p>
+      </div>
+      <div style="clear:both;"></div>
+    </article>
+    <form class="flex-container">
+      <div class="profile-pic flex-grow-0"></div>
+      <div class="flex-grow-1">
+        <div class="form-group flex-container">
+          <input type="text" ng-model="main.forum.commentInput" class="form-control input-sm" placeholder="What do you think?">
+        </div>
+        <div>
+          <p ng-if="main.Auth.isLoggedIn()"><small class="text-muted">By {{main.Auth.getCurrentUser().name}}</small></p>
+          <button type="button" ng-click="main.forum.submitComment()" class="btn btn-default">Add comment</button>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+    </form>
+  </div>
+</div>
+
+
+<div class="container-fluid map-panel-container">
+  <div class="row">
+    <ui-gmap-google-map 
+      center="main.map.status.center" 
+      zoom="main.map.status.zoom" 
+      options="main.map.settings" 
+      events="main.map.events"
+      control="main.map.control">
+
+      <!-- Chat Markers -->
+      <!-- <ui-gmap-markers 
+        ng-if="main.$state.includes('main.chat')"
+        idkey="'_id'"
+        coords="'coords'" 
+        models="main.users" 
+        icon="main.map.icons.user">
+      </ui-gmap-markers> -->
+
+      
+
+      <!-- Forum Markers -->
+      <ui-gmap-markers 
+        ng-if="main.$state.includes('main.forum')"
+        idkey="'_id'"
+        coords="'coords'" 
+        models="main.posts" 
+        icon="'icon'"
+        events="main.map.markerEvents">
+      </ui-gmap-markers>
+
+    </ui-gmap-google-map>
+  </div>
+</div>
+

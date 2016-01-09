@@ -1,0 +1,22 @@
+<div class="live-chatbar" controller="LiveChatbarCtrl">
+	<div class="container">
+		<form class="row" name="chatForm">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="chat.chatText" ng-keypress="chat.keyPress($event)">
+					<span class="input-group-btn">
+						<button 
+							class="btn btn-secondary chat-button" 
+							type="button" 
+							ng-click="chat.submit()" 
+							ng-disabled="chat.chatText === '' || 
+								!chat.Auth.isLoggedIn() || 
+								!chat.chatService.isChatServiceReady()">
+								Send
+						</button>
+					</span>
+				</div>
+			</div>
+		</form>
+	</div>	
+</div>

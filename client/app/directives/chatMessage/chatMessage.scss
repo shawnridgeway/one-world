@@ -1,0 +1,14 @@
+@keyframes fadeOut {
+	from {opacity: 1}
+	to {opacity: 0}
+}
+
+.chat-message {
+	color: #222;
+	font-size: 14px;
+	line-height: 1.5;
+	animation-name: fadeOut;
+    animation-duration: 0.5s;
+    animation-delay: 5s;	
+    word-wrap: break-word;
+}
